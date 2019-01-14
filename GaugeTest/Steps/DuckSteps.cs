@@ -6,17 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Chrome;
 
 namespace GaugeTest.Steps
 {
     class DuckSteps
     {
-        IWebDriver _driver = Hooks.WebDriver;
+        IWebDriver _driver;
 
-        [Step("Go to DuckDuckGo")]
-        public void GoToDuckDuckGo()
+        [BeforeSuite]
+        public void Initialize()
         {
-            _driver.Navigate().GoToUrl("https://duckduckgo.com/");
+            _driver = new ChromeDriver();
+        }
+
+        [Step("Go to <url>")]
+        public void GoToDuckDuckGo(string url)
+        {
+            Console.WriteLine(url);
+            _driver.Navigate().GoToUrl(url);
         }
 
         [Step("Click to search Field")]
@@ -37,11 +45,17 @@ namespace GaugeTest.Steps
             _driver.FindElement(By.LinkText("https://docs.microsoft.com/en-us/dotnet/csharp/")).Click();
         }
 
-        [Step("Check title text <C# Guide> exist")]
+        [Step("Check title text <expectedT> exist")]
         public void CheckTitleTextCSharpGuideExist(string expectedT)
         {
-            _driver.FindElement(By.Id("c-guide")).Text.Should().Be("C# Guide");
-            Console.WriteLine(_driver.FindElement(By.Id("c-guide")).Text);
+            _driver.FindElement(By.Id("c-guide")).Text.Should().Be(expectedT);
+            //Console.WriteLine(_driver.FindElement(By.Id("c-guide")).Text);
+        }
+
+        [AfterSuite]
+        public void AfterSuite()
+        {
+            _driver?.Quit();
         }
     }
 }
