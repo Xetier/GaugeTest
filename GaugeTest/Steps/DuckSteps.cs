@@ -13,8 +13,8 @@ namespace GaugeTest.Steps
     {
         IWebDriver _driver = Hooks.WebDriver;
 
-        [Step("Go to google")]
-        public void GoToGoogle()
+        [Step("Go to DuckDuckGo")]
+        public void GoToDuckDuckGo()
         {
             _driver.Navigate().GoToUrl("https://duckduckgo.com/");
         }
@@ -37,8 +37,8 @@ namespace GaugeTest.Steps
             _driver.FindElement(By.LinkText("https://docs.microsoft.com/en-us/dotnet/csharp/")).Click();
         }
 
-        [Step("Check title text 'C# Guide' exist")]
-        public void CheckTitleTextCSharpGuideExist()
+        [Step("Check title text <C# Guide> exist")]
+        public void CheckTitleTextCSharpGuideExist(string expectedT)
         {
             _driver.FindElement(By.Id("c-guide")).Text.Should().Be("C# Guide");
             Console.WriteLine(_driver.FindElement(By.Id("c-guide")).Text);

@@ -1,5 +1,6 @@
 ﻿using Gauge.CSharp.Lib.Attribute;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +13,33 @@ namespace GaugeTest
     {
         public static IWebDriver _driver;
 
-        public Hooks();
+        public Hooks()
+        {
+            _driver = new ChromeDriver();
+
+        }
 
         public static IWebDriver WebDriver { get; }
 
         [AfterScenario]
-        public void AfterScenario();
+        public void AfterScenario()
+        {
+            
+        }
         [AfterSuite]
-        public void AfterSuite();
+        public void AfterSuite()
+        {
+
+        }
         [BeforeScenario]
-        public void BeforeScenario();
+        public void BeforeScenario()
+        {
+
+        }
         [BeforeSuite]
-        public void Initialize();
+        public void Initialize()
+        {
+
+        }
     }
 }
