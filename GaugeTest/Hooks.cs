@@ -24,7 +24,7 @@ namespace GaugeTest
         [AfterScenario]
         public void AfterScenario()
         {
-            
+
         }
         [AfterSuite]
         public void AfterSuite()
